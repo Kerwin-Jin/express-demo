@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello</title>
+  <link href="http://localhost:8080/css/style.css" rel="stylesheet">
+</head>
+<body>
+  <h1>Hello</h1>
+  
+  <div>
+    <button id="btn">获取数据</button>
+    <button id="btn_get_all">获取全部数据</button>
+    <button id="login_btn">点击登录</button>
+    <button id="admin_btn">获取管理员信息</button>
+    <button id="logout_btn">退出</button>
+    <button id="download_btn">下载文件</button>
+  </div>
+
+
+</body>
+<script src="http://localhost:8080/js/index.js" ></script>
+<script>
+
+  const btn = document.querySelector("#btn")
+  const loginBen = document.querySelector("#login_btn")
+  const logoutBtn = document.querySelector("#logout_btn")
+  const adminBtn = document.querySelector("#admin_btn")
+  const getAllBtn = document.querySelector("#btn_get_all")
+
+  adminBtn.addEventListener("click",()=>{
+    fetch('http://localhost:8080/api/admin/whoami', {credentials:'include'}).then(res=>res.json()).then(res=>console.log(res))
+  })
+
+  btn.addEventListener("click",()=>{
+    fetch('http://localhost:8080/api/student/getOneStudent',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials:"include",
+      body:JSON.stringify({id:98})
+    }).then(res=>res.json()).then(res=>{
+      console.log(res)
+    })
+  })
+
+  getAllBtn.addEventListener('click',()=>{
+    fetch('http://localhost:8080/api/student/getAllStudents',{
+      credentials:"include",
+    }).then(res=>res.json()).then(res=>{
+      console.log(res)
+    })
+  })
+
+  loginBen.addEventListener("click",()=>{
+    fetch('http://localhost:8080/api/admin/login',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      credentials:'include',
+      body:JSON.stringify({username:'晋飞', password:'123456'})
+    }).then(res=>res.json()).then(res=>console.log(res))
+  })
+
+  logoutBtn.addEventListener("click",()=>{
+    fetch('http://localhost:8080/api/admin/logout',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },credentials:'include',
+      body:JSON.stringify({username:'晋飞', password:'123456'})
+    }).then(res=>res.json()).then(res=>{
+      console.log(res)
+    })
+  })
+
+
+
+  // function uploadFn(){
+  //   document.querySelector("#upload_btn").addEventListener('click',()=>{
+  //     const input = document.querySelector("[type=file]")
+  //     console.log(input.files)
+
+  //     const formData = new FormData()
+  //     formData.append('name','zek')
+  //     for (const i of input.files) {
+  //       formData.append('img',i)
+  //     }
+
+  //     fetch("http://localhost:8080/api/upload/upload_image",{
+  //       body: formData,
+  //       method:'POST'
+  //     }).then(res=>res.json()).then(res=>{
+  //       console.log(res)
+  //     })
+  //   })
+  // }
+
+
+  // function downloadFile(){
+  //   const btn = document.querySelector('#download_btn')
+  //   btn.addEventListener('click',()=>{
+  //     fetch("/api/upload/download")
+  //   })
+  // }
+  // uploadFn()
+
+  // downloadFile()
+
+</script>
+</html>

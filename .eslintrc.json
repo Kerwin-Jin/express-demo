@@ -1,0 +1,18 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": "standard",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-unused-vars":"off",
+        "camelcase":"off",
+        "handle-callback-err":"off",
+        "arrow-parens":"warn"
+    }
+}

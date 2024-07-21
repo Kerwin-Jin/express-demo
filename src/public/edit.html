@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css" rel="stylesheet">
+<style>
+  #editor—wrapper {
+    border: 1px solid #ccc;
+    z-index: 100; /* 按需定义 */
+  }
+  #toolbar-container { border-bottom: 1px solid #ccc; }
+  #editor-container { height: 500px; }
+</style>
+</head>
+<body>
+  <div id="editor—wrapper">
+    <div id="toolbar-container"><!-- 工具栏 --></div>
+    <div id="editor-container"><!-- 编辑器 --></div>
+  </div>
+  <button id="btn">改变内容</button>
+</body>
+<script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
+<script>
+  const btn = document.querySelector("#btn")
+const { createEditor, createToolbar } = window.wangEditor
+
+const editorConfig = {
+    placeholder: '请输入内容',
+    onChange(editor) {
+      const html = editor.getHtml()
+      console.log('editor content', html)
+      // 也可以同步到 <textarea>
+    }
+}
+
+const editor = createEditor({
+    selector: '#editor-container',
+    html: '<p>hello <strong>world</strong></p>',
+    config: editorConfig,
+    mode: 'default', // or 'simple'
+})
+
+const toolbarConfig = {}
+
+const toolbar = createToolbar({
+    editor,
+    selector: '#toolbar-container',
+    config: toolbarConfig,
+    mode: 'default', // or 'simple'
+})
+
+btn.addEventListener('click',()=>{
+  editor.setHtml('<p>hello <strong>hahahhahah</strong></p>')
+})
+</script>
+</html>
