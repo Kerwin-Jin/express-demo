@@ -3,9 +3,10 @@ const validate = require('validate.js')
 function validateTest () {
   // 要验证的对象
   const obj = {
-    name: 'fhsjkdhfkjsdhfksdhfsjdhf',
+    name: 'fsjkfsdfsdfsdfsdf',
     age: 18,
-    email: '13427348@qq.com'
+    email: '13427348@qq.com',
+    size: 'small1'
   }
 
   // 验证规则
@@ -18,7 +19,14 @@ function validateTest () {
       type: 'string',
       length: {
         minium: 6,
-        maximum: 10
+        maximum: 10,
+        tooLong: 'needs to have %{count} words or less'
+      }
+    },
+    size: {
+      inclusion: {
+        within: ['small', 'medium', 'large'],
+        message: "^We're currently out of %{value}"
       }
     }
   }

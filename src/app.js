@@ -14,11 +14,12 @@ const errorMiddleware = require('./middleware/errorMiddleware')
 const corsMiddleware = require('./middleware/corsMiddleware')
 const ClassesRouter = require('./routes/classesRouter')
 const BookRouter = require('./routes/bookRouter')
+const EmailRouter = require('./routes/emailRouter')
 
 const app = express()
 
 app.use(express.static(path.resolve(__dirname, './public'), { maxAge: 3600 * 1000 }))
-app.use(express.static(path.resolve(__dirname, './upload'), { maxAge: 3600 * 1000 }))
+app.use(express.static(path.resolve(__dirname, './resource'), { maxAge: 3600 * 1000 }))
 
 app.use(cookieParser())
 
@@ -49,6 +50,7 @@ app.use('/api/book', BookRouter)
 app.use('/api/classes', ClassesRouter)
 app.use('/api/student', StudentRouter)
 app.use('/api/admin', AdminRouter)
+app.use('/api/email', EmailRouter)
 
 app.use(errorMiddleware)
 
