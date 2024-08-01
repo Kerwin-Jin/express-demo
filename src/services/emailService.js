@@ -4,15 +4,15 @@ const config = {
   host: 'smtp.qq.com',
   port: 465,
   auth: {
-    user: '1351207863@qq.com',
-    pass: 'ikomofjimjohbacb'
+    // user: '',
+    // pass: ''
   }
 }
 
 const transporter = nodemailer.createTransport(config)
 
 module.exports = {
-  sendEmail ({ subject, to, text, html, from = '<1351207863@qq.com>' }) {
+  sendEmail ({ subject, to, text, html, from = '' }) {
     const mail = {
       // 发件人 邮箱  '昵称<发件人邮箱>'
       from,
